@@ -40,8 +40,8 @@ defaults
   <% end -%>
 
 # Always HERE
-<% node[:instances][:group].each do |group| -%>
-# <%= group['name'] %>
+<% @instances[:group].each do |group| -%>
+# <%= group[:name] %>
 <% end -%>
 
 # Set up application listeners here.
