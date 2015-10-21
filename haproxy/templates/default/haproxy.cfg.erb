@@ -35,12 +35,12 @@ defaults
   option          abortonclose                                      # enable early dropping of aborted requests from pending queue
   option          httpchk                                           # enable HTTP protocol to check on servers health
   <% if node[:haproxy][:enable_stats] -%>
-  stats auth <%= node[:haproxy][:stats_user] %>:<%= node[:haproxy][:stats_password] %>
+  stats auth <vi %= node[:haproxy][:stats_user] %>:<%= node[:haproxy][:stats_password] %>
   stats uri <%= node[:haproxy][:stats_url] %>
   <% end -%>
 
 # Always HERE
-# <%= @instances %>
+# <%= @instances[:group] %>
 
 # Set up application listeners here.
 <% if node[:haproxy][:rails_backends].blank? && node[:haproxy][:php_backends].blank? && node[:haproxy][:nodejs_backends].blank? && node[:haproxy][:static_backends].blank? && node[:haproxy][:java_backends].blank? -%>
