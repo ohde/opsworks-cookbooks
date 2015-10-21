@@ -16,7 +16,7 @@ file_content = obj.read
 # Log output (optional)
 Chef::Log.info(file_content)
 
-instances = JSON.parse(file_content)
+instances = "instances": JSON.parse(file_content)
 
 template "/etc/haproxy/haproxy.cfg" do
   cookbook "haproxy"
