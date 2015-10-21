@@ -261,7 +261,9 @@ frontend http-in
   <% elsif !node[:haproxy][:java_backends].empty? -%>
   default_backend java_servers
   <% end -%>
-  
+<% node[:projects][:group].each do |group| -%>
+# <%= group['name'] %>
+<% end -%>
 frontend https-in
   mode tcp
   bind :443
