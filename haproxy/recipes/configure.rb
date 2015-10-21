@@ -16,7 +16,7 @@ file_content = obj.read
 # Log output (optional)
 Chef::Log.info(file_content)
 
-projects = JSON.parse(file_content)
+instances = JSON.parse(file_content)
 
 template "/etc/haproxy/haproxy.cfg" do
   cookbook "haproxy"
@@ -25,7 +25,7 @@ template "/etc/haproxy/haproxy.cfg" do
   group "root"
   mode 0644
   notifies :reload, "service[haproxy]"
-  variables :projects => projects
+  variables :instances => instances
 end
 
 execute "echo 'checking if HAProxy is not running - if so start it'" do
