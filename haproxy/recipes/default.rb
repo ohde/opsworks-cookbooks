@@ -39,7 +39,7 @@ obj = s3.buckets['j6-haproxy-test'].objects['projects.json']
 file_content = obj.read
 # Log output (optional)
 Chef::Log.info(file_content)
-instances = "instances": JSON.parse(file_content)
+instances = JSON.parse(file_content)
 
 template '/etc/haproxy/haproxy.cfg' do
   source 'haproxy.cfg.erb'
