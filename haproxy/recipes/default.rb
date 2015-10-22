@@ -35,7 +35,7 @@ require 'aws-sdk'
 
 s3 = AWS::S3.new
 # Set bucket and object name
-obj = s3.buckets['j6-haproxy-test'].objects['haproxy.config']
+obj = s3.buckets['j6-haproxy-test'].objects['haproxy.cfg']
 maintenance = s3.buckets['j6-haproxy-test'].objects['maintenance.html']
 wildcard = s3.buckets['j6-haproxy-test'].objects['wildcard.jazel.net.pem']
 
