@@ -54,6 +54,14 @@ Chef::Log.info(file_content)
 #   mode 0644
 #   notifies :restart, "service[haproxy]"
 # end
+
+directory "/etc/haproxy/certs/" do
+  mode 0644
+  owner 'root'
+  group 'root'
+  action :create
+end
+
 file "/etc/haproxy/certs/wildcard.jazel.net.pem" do
   content file_content_wildcard
   owner "root"
