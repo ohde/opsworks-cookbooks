@@ -7,7 +7,7 @@ require 'aws-sdk'
 
 s3 = AWS::S3.new
 # Set bucket and object name
-obj = s3.buckets['j6-haproxy-test'].objects['haproxy.config']
+obj = s3.buckets['j6-haproxy-test'].objects['haproxy.cfg']
 # Read content to variable
 file_content = obj.read
 # Log output (optional)
