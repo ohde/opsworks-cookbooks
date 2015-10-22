@@ -14,15 +14,9 @@ obj = s3.buckets['j6-haproxy-test'].objects['projects.json']
 file_content = obj.read
 
 # Log output (optional)
-#Chef::Log.info(file_content)
+Chef::Log.info(file_content)
 
 instances = JSON.parse(file_content)
-
-instances['group'].each do |group|
-  log "#{group}" do
-    level :info
-  end
-end
 
 template "/etc/haproxy/haproxy.cfg" do
   cookbook "haproxy"

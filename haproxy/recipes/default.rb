@@ -32,14 +32,14 @@ end
 include_recipe 'haproxy::service'
 
 require 'aws-sdk'
+
 s3 = AWS::S3.new
 # Set bucket and object name
 obj = s3.buckets['j6-haproxy-test'].objects['projects.json']
 # Read content to variable
 file_content = obj.read
 # Log output (optional)
-#Chef::Log.info(file_content)
-
+Chef::Log.info(file_content)
 instances = JSON.parse(file_content)
 
 template '/etc/haproxy/haproxy.cfg' do
