@@ -31,7 +31,7 @@ end
 
 include_recipe 'haproxy::service'
 
-# require 'aws-sdk'
+require 'aws-sdk'
 
 s3 = AWS::S3.new
 # Set bucket and object name
