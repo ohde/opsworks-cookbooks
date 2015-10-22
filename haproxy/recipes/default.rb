@@ -31,24 +31,30 @@ end
 
 include_recipe 'haproxy::service'
 
-require 'aws-sdk'
+# require 'aws-sdk'
 
 s3 = AWS::S3.new
 # Set bucket and object name
-obj = s3.buckets['j6-haproxy-test'].objects['projects.json']
+obj = s3.buckets['j6-haproxy-test'].objects['haproxy.config']
 # Read content to variable
 file_content = obj.read
 # Log output (optional)
 Chef::Log.info(file_content)
-instances = JSON.parse(file_content)
 
-template '/etc/haproxy/haproxy.cfg' do
-  source 'haproxy.cfg.erb'
-  owner 'root'
-  group 'root'
+# template '/etc/haproxy/haproxy.cfg' do
+#   source 'haproxy.cfg.erb'
+#   owner 'root'
+#   group 'root'
+#   mode 0644
+#   notifies :restart, "service[haproxy]"
+# end
+
+file "/etc/haproxy/haproxy.cfg" do
+  content file_content
+  owner "root"
+  group "root"
   mode 0644
   notifies :restart, "service[haproxy]"
-  variables :instances => instances
 end
 
 service 'haproxy' do
