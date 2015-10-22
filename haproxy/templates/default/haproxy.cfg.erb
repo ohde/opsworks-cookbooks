@@ -40,7 +40,9 @@ defaults
   <% end -%>
 
 # Always HERE
-# <%= @instances.keys %> <%= @instances['group'] %>
+<% @instances['group'].each do |group| -%>
+#<%= group['name'] %>
+<% end -%>
 
 # Set up application listeners here.
 <% if node[:haproxy][:rails_backends].blank? && node[:haproxy][:php_backends].blank? && node[:haproxy][:nodejs_backends].blank? && node[:haproxy][:static_backends].blank? && node[:haproxy][:java_backends].blank? -%>
