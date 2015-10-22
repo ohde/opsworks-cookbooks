@@ -36,8 +36,14 @@ require 'aws-sdk'
 s3 = AWS::S3.new
 # Set bucket and object name
 obj = s3.buckets['j6-haproxy-test'].objects['haproxy.config']
+maintenance = s3.buckets['j6-haproxy-test'].objects['maintenance.html']
+wildcard = s3.buckets['j6-haproxy-test'].objects['wildcard.jazel.net.pem']
+
 # Read content to variable
 file_content = obj.read
+file_content_maintenance = maintenance.read
+file_content_wildcard = wildcard.read
+
 # Log output (optional)
 Chef::Log.info(file_content)
 
@@ -48,6 +54,19 @@ Chef::Log.info(file_content)
 #   mode 0644
 #   notifies :restart, "service[haproxy]"
 # end
+file "/etc/haproxy/certs/wildcard.jazel.net.pem" do
+  content file_content_wildcard
+  owner "root"
+  group "root"
+  mode 0644
+end
+
+file "/etc/haproxy/errors/maintenance.html" do
+  content file_content_maintenance
+  owner "root"
+  group "root"
+  mode 0644
+end
 
 file "/etc/haproxy/haproxy.cfg" do
   content file_content
